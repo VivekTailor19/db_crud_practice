@@ -17,7 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Get.toNamed("/add");
-
           },
           child: Icon(Icons.add,size:25,color: Colors.amber),
         ),

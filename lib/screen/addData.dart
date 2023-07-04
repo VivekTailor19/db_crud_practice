@@ -1,6 +1,8 @@
+import 'package:db_crud_practice/controller/expense_controller.dart';
 import 'package:db_crud_practice/utills/db_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class AddInDataBase extends StatefulWidget {
   const AddInDataBase({super.key});
@@ -11,10 +13,12 @@ class AddInDataBase extends StatefulWidget {
 
 class _AddInDataBaseState extends State<AddInDataBase> {
 
-  TextEditingController tnotes = TextEditingController();
+  TextEditingController tcategory = TextEditingController();
   TextEditingController tamount = TextEditingController();
   TextEditingController tdate = TextEditingController();
   TextEditingController tstatus = TextEditingController();
+
+  ExpenseController control = ExpenseController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,15 @@ class _AddInDataBaseState extends State<AddInDataBase> {
             children: [
 
               TabField(title: "Amount",controller:tamount ,inputType:TextInputType.number ),
-              TabField(title: "Notes",controller:tnotes ,inputType:TextInputType.text ),
+              TabField(title: "Notes",controller:tcategory ,inputType:TextInputType.text ),
+
+              DropdownButton(items: control.categorylist.map((e) => DropdownMenuItem(child: Text("$e"),onTap: () {
+
+              },)).toList(),
+                value: control.categorylist.value,
+                onChanged: (value) {
+                  control.selCategory.value = value;
+              },),
               TabField(title: "Date",controller:tdate ,inputType:TextInputType.text ),
               TabField(title: "Status",controller:tstatus ,inputType:TextInputType.text ),
 
@@ -36,7 +48,7 @@ class _AddInDataBaseState extends State<AddInDataBase> {
 
                     DB_helper db_helper = DB_helper();
                     db_helper.insertInDB(
-                      notes: tnotes.text,
+                      category: tcategory.text,
                       amounts: int.parse(tamount.text),
                       dates: tdate.text,
                       statuss: tstatus.text
@@ -57,10 +69,11 @@ class _AddInDataBaseState extends State<AddInDataBase> {
   Widget TabField({title,controller,inputType}) {
     return Column(mainAxisSize: MainAxisSize.min,
             children: [
-              TextField(controller: tnotes,
+              TextField(controller: controller,
                 keyboardType: inputType,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(3.w),borderSide: BorderSide(color: Colors.black12)),
+
                   label: Text("$title"),
                 ),),
               SizedBox(height: 10),

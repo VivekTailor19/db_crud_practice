@@ -29,13 +29,13 @@ class DB_helper {
     return await openDatabase(path,
         version: 1,
         onCreate: (db, version) async {
-         return await db.execute('CREATE TABLE datatable (id INTEGER PRIMARY KEY AUTOINCREMENT,note TEXT ,amount INTEGER ,date TEXT)');
+         return await db.execute('CREATE TABLE datatable (id INTEGER PRIMARY KEY AUTOINCREMENT,category TEXT ,amount INTEGER ,date TEXT)');
         },);
   }
 
-  Future<int> insertInDB({notes,dates,amounts,statuss})
+  Future<int> insertInDB({category,dates,amounts,statuss})
   async {
-    return await database!.insert('datatable', {'note': notes, 'amount': amounts,'date':dates,'status':statuss});
+    return await database!.insert('datatable', {'category': category, 'amount': amounts,'date':dates,'status':statuss});
 
   }
 

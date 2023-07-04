@@ -38,6 +38,8 @@ dependencies:
   path_provider: ^2.0.15
   get: ^4.6.5
   sqflite: ^2.2.8+4
+  device_preview: ^1.1.0
+  sizer: ^2.0.15
 
 dev_dependencies:
   flutter_test:
