@@ -8,9 +8,9 @@ import 'package:sizer/sizer.dart';
 
 void main() {
   runApp(
-      DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) =>
+      // DevicePreview(
+      //   enabled: !kReleaseMode,
+      //   builder: (context) =>
             Sizer(
               builder: (context, orientation, deviceType) => GetMaterialApp(
                 debugShowCheckedModeBanner: false,
@@ -20,6 +20,6 @@ void main() {
                 },
         ),
       ),
-    ),
+   // ),
   );
 }
