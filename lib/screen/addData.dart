@@ -14,10 +14,30 @@ class AddInDataBase extends StatefulWidget {
 }
 
 class _AddInDataBaseState extends State<AddInDataBase> {
+
   TextEditingController tcategory = TextEditingController();
   TextEditingController tamount = TextEditingController();
   TextEditingController tdate = TextEditingController();
   TextEditingController tstatus = TextEditingController();
+
+  Map mapData = {};
+  @override
+  void initState() {
+    super.initState();
+    mapData = Get.arguments;
+
+    if(mapData['option'] == 0)
+      {
+        int index = mapData['index'];
+        tcategory = TextEditingController(text: control.dataList[index]['category'] );
+        tamount = TextEditingController(text: "${control.dataList[index]['amount']}" );
+        tdate = TextEditingController(text: control.dataList[index]['date'] );
+        tstatus = TextEditingController(text: control.dataList[index]['status'] );
+      }
+
+  }
+
+
 
   ExpenseController control = Get.put(ExpenseController());
 
@@ -25,6 +45,10 @@ class _AddInDataBaseState extends State<AddInDataBase> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+
+        appBar: AppBar(title: Text("Add Data"),centerTitle: true,),
+
+
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -61,13 +85,30 @@ class _AddInDataBaseState extends State<AddInDataBase> {
                   onPressed: () async {
                     DB_helper db_helper = DB_helper();
 
-                    ExpenseModel model = ExpenseModel(
-                        category: tcategory.text,
-                        amount: int.parse(tamount.text),
-                        date: tdate.text,
-                        status: tstatus.text);
-                    await db_helper.insertInDB(model);
-                    await control.loadDB();
+                    if(mapData['option'] == 1 )
+                    {
+                      ExpenseModel model = ExpenseModel(
+                          category: tcategory.text,
+                          amount: int.parse(tamount.text),
+                          date: tdate.text,
+                          status: tstatus.text);
+                      await db_helper.insertInDB(model);
+                    }
+                    else
+                      {
+                        ExpenseModel model = ExpenseModel(
+                            id: control.dataList[mapData['index']]['id'],
+                            category: tcategory.text,
+                            amount: int.parse(tamount.text),
+                            date: tdate.text,
+                            status: tstatus.text
+                        );
+                        await db_helper.updateDB(model);
+                      }
+
+
+
+                   await control.loadDB();
                     Get.back();
                   },
                   child: Text(

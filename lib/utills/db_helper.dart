@@ -65,6 +65,25 @@ class DB_helper {
     return list;
   }
 
+  Future<void> deleteDB(int selId)
+  async {
+    database = await createDB();
+    database!.delete(dbName,where: "id=?" ,whereArgs:[selId] );
+  }
+
+  Future<void> updateDB(ExpenseModel expenseModel)
+  async {
+    database = await createDB();
+
+    database!.update(dbName, {
+      'category': expenseModel.category,
+      'amount': expenseModel.amount,
+      'date':expenseModel.date,
+      'status':expenseModel.status
+    },where: "id=?",whereArgs: [expenseModel.id]
+    );
+  }
+
 }
 
 
