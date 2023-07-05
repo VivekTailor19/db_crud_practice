@@ -46,7 +46,7 @@ class _AddInDataBaseState extends State<AddInDataBase> {
     return SafeArea(
       child: Scaffold(
 
-        appBar: AppBar(title: Text("Add Data"),centerTitle: true,),
+        appBar: AppBar(title: Text(mapData['option']==1 ? "Add Data" : "Update"),centerTitle: true,),
 
 
         body: Padding(
