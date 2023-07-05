@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   await  control.loadDB();
                   },
 
+
                   onLongPress: () {
                     Get.toNamed("/add",arguments: {"option":0,"index":index});
                   },
