@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
 
                   child: ListTile(
-                      leading: Text("${control.dataList[index]['id']}"),
+                      leading: CircleAvatar(backgroundImage: MemoryImage(control.dataList[index]['img']),radius: 30,),
                       title: Text("${control.dataList[index]['category']}"),
                       subtitle: Text("${control.dataList[index]['amount']}"),
                       trailing: Text("${control.dataList[index]['status']}"),

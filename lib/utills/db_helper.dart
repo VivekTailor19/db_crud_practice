@@ -34,7 +34,7 @@ class DB_helper {
   async {
     Directory dir = await getApplicationDocumentsDirectory();
     String path = join(dir.path, dbPath);
-    String query = 'CREATE TABLE $dbName (id INTEGER PRIMARY KEY AUTOINCREMENT, category TEXT, amount INTEGER, date TEXT, status TEXT)';
+    String query = 'CREATE TABLE $dbName (id INTEGER PRIMARY KEY AUTOINCREMENT, category TEXT, amount INTEGER, date TEXT, status TEXT, img BLOB)';
 
     return await openDatabase(path,
         version: 1,
@@ -43,6 +43,7 @@ class DB_helper {
         },);
   }
 
+
   Future<void> insertInDB(ExpenseModel expenseModel)
   async {
     database = await createDB();
@@ -50,7 +51,8 @@ class DB_helper {
       'category': expenseModel.category,
       'amount': expenseModel.amount,
       'date':expenseModel.date,
-      'status':expenseModel.status
+      'status':expenseModel.status,
+      'img':expenseModel.img
     }
     );
 
@@ -79,7 +81,8 @@ class DB_helper {
       'category': expenseModel.category,
       'amount': expenseModel.amount,
       'date':expenseModel.date,
-      'status':expenseModel.status
+      'status':expenseModel.status,
+      'img':expenseModel.img
     },where: "id=?",whereArgs: [expenseModel.id]
     );
   }
