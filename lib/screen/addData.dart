@@ -40,6 +40,10 @@ class _AddInDataBaseState extends State<AddInDataBase> {
         tstatus = TextEditingController(text: control.dataList[index]['status'] );
         control.imgByte = control.dataList[index]['img'];
       }
+    else
+      {
+        control.imgPath.value = "";
+      }
 
   }
 
