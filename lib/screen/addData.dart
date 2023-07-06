@@ -66,44 +66,46 @@ class _AddInDataBaseState extends State<AddInDataBase> {
 
               children: [
                 SizedBox(height: 25,),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    mapData['option']==1
-                        ? CircleAvatar(radius: 40,
-                      backgroundImage: FileImage(File("${control.imgPath.value}")),
-                    ) :
-                          CircleAvatar(radius: 40,
-                      backgroundImage: MemoryImage(control.dataList[mapData['index']]['img']),
-                    ),
-                    Column(mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ElevatedButton(onPressed: () async {
+                Obx(
+                  () =>  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      mapData['option']==1
+                          ? CircleAvatar(radius: 40,
+                        backgroundImage: FileImage(File("${control.imgPath.value}")),
+                      ) :
+                            CircleAvatar(radius: 40,
+                        backgroundImage: MemoryImage(control.dataList[mapData['index']]['img']),
+                      ),
+                      Column(mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ElevatedButton(onPressed: () async {
 
-                          ImagePicker pick = ImagePicker();
+                            ImagePicker pick = ImagePicker();
 
-                          XFile? xfile = await pick.pickImage(source: ImageSource.camera,imageQuality: 20);
+                            XFile? xfile = await pick.pickImage(source: ImageSource.camera,imageQuality: 20);
 
-                          control.imgByte = await xfile!.readAsBytes();
+                            control.imgByte = await xfile!.readAsBytes();
 
-                          control.imgPath.value = xfile.path;
+                            control.imgPath.value = xfile.path;
 
 
 
-                        }, child: Text("Camera")),
+                          }, child: Text("Camera")),
 
-                        ElevatedButton(onPressed: () async {
-                          ImagePicker pick = ImagePicker();
+                          ElevatedButton(onPressed: () async {
+                            ImagePicker pick = ImagePicker();
 
-                          XFile? xfile = await pick.pickImage(source: ImageSource.gallery,imageQuality: 30);
+                            XFile? xfile = await pick.pickImage(source: ImageSource.gallery,imageQuality: 30);
 
-                          control.imgByte = await xfile!.readAsBytes();
+                            control.imgByte = await xfile!.readAsBytes();
 
-                          control.imgPath.value = xfile.path;
-                        }, child: Text("Gallery")),
+                            control.imgPath.value = xfile.path;
+                          }, child: Text("Gallery")),
 
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 TabField(
                     title: "Amount",
