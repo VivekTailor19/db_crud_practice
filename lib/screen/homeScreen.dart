@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(title: Text("ExpenseBar"),),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child:  Obx(

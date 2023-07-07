@@ -86,7 +86,7 @@ class _AddInDataBaseState extends State<AddInDataBase> {
 
                             control.imgByte = await xfile!.readAsBytes();
 
-                            control.imgPath.value = xfile.path;
+                            control.imgPath.value =await xfile.path;
 
 
 
@@ -163,7 +163,7 @@ class _AddInDataBaseState extends State<AddInDataBase> {
                       Get.back();
                     },
                     child: Text(
-                      "ADD",
+                      mapData['option']==1 ? "Add" : "Update",
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           color: Colors.indigo,
